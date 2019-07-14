@@ -4,7 +4,7 @@ This is a script that creates a global function called `datetime`. You can use t
 Once the variable has been created, you can call it from the command line like `:put [$datetime]`. See below for an example of a script that can use the function.
 
 ## Install
-This script only needs to run once per boot. You can make a scheduled task that runs this script at startup to make sure the `$datetime` global function is always available to you.
+The create-datetime-function script only needs to run once per boot. You can make a scheduled task that runs this script at startup to make sure the `$datetime` global function is always available to you.
 
 ## Example Script
 ```
