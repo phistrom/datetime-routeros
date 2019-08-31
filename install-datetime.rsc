@@ -8,5 +8,5 @@
     :if ([/system scheduler find name="create-datetime-function"] != "") do={
         /system scheduler remove create-datetime-function
     }
-    /system scheduler add name=create-datetime-function on-event="/system script run datetime" policy=read start-time=startup
+    /system scheduler add name=create-datetime-function on-event="/system script run create-datetime-function" policy=read start-time=startup
 }
