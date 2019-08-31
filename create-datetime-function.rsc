@@ -120,7 +120,8 @@
         "H"=$H
         "M"=[:pick $ti 3 5]
         "S"=[:pick $ti 6 8]
-        "date"="$Y-$m-$d"
+        "date"=$dt
+        "ymd"="$Y-$m-$d"
         "I"=$I
         "p"=$p
         "z"=$z
