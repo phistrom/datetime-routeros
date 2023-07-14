@@ -16,6 +16,23 @@
         "nov"="11"
         "dec"="12"
     }
+	
+	:local monthsN {
+        "01"="jan"
+        "02"="feb"
+        "03"="mar"
+        "04"="apr"
+        "05"="may"
+        "06"="jun"
+        "07"="jul"
+        "08"="aug"
+        "09"="sep"
+        "10"="oct"
+        "11"="nov"
+        "12"="dec"
+    }
+	
+	
 
     :local dNames {"Sunday"; "Monday"; "Tuesday"; "Wednesday"; "Thursday"; "Friday"; "Saturday"}
 
@@ -23,16 +40,38 @@
     :local ti
 
     # this loop protects in the rare event we hit midnight between getting the date and time
-    do {
+    :do {
         :set dt [/system clock get date]
         :set ti [/system clock get time]
     } while=($dt != [/system clock get date])
 
-    :local b [:pick $dt 0 3 ]
-    :local Y [:pick $dt 7 11 ]
-    :local y [:pick $dt 9 11]
-    :local m ($months->$b)
-    :local d [:pick $dt 4 6]
+
+		:local b
+		:local m
+		:local Y
+		:local y
+		:local d
+
+    :if ([ :pick $dt 4 5 ] != "-") do={
+    # Pre Ros 7.10
+		:set b [:pick $dt 0 3 ]
+		:set m ($months->$b)
+		:set Y [:pick $dt 7 11 ]
+		:set y [:pick $dt 9 11]
+		:set d [:pick $dt 4 6]
+		#:log warning "<=7.9 : $b - $m - $Y - $y - $d"
+	} else={ 
+	# Post Ros 7.10
+		:set m [:pick $dt 5 7 ]
+		:set b ($monthsN->$m)
+		:set Y [:pick $dt 0 4]
+		:set y [:pick $dt 2 4]
+		:set d [:pick $dt 8 10]		
+		#:log warning "7.10+ : $b - $m - $Y - $y - $d"
+
+	}
+
+
     :local H [:pick $ti 0 2]
     # :local M [:pick $ti 3 5]
     # :local S [:pick $ti 6 8]
